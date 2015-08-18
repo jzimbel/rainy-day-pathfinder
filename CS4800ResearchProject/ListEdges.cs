@@ -5,19 +5,21 @@ using System.Linq;
 namespace CS4800ResearchProject
 {
     /// <summary>
-    /// Holds a list of shortest edges between each group.
+    /// Holds a list of shortest edges between each group. Each edge is
+    /// represented once, e.g. if there is an edge (A, B) then there is no
+    /// edge (B, A). Use GetEdge to get an edge between two groups.
     /// </summary>
     public static class ListEdges
     {
-        public static readonly List<Edge> EDGES;
+        private static readonly List<Edge> EDGES;
 
         static ListEdges()
         {
             List<Edge> edgesConstructor = new List<Edge>();
-            for (int i = 0; i < ListGroups.GROUPS.Count(); i++)
+            for (int i = 0; i < ListGroups.GROUPS.Count; i++)
             {
                 Group groupA = ListGroups.GROUPS[i];
-                for (int j = i+1; j < ListGroups.GROUPS.Count(); j++)
+                for (int j = i+1; j < ListGroups.GROUPS.Count; j++)
                 {
                     Group groupB = ListGroups.GROUPS[j];
                     edgesConstructor.Add(groupA.ShortestEdge(groupB));
@@ -30,23 +32,27 @@ namespace CS4800ResearchProject
         /// Returns Edge with matching Id within ListEdges.EDGES if one exists.
         /// Otherwise returns null.
         /// </summary>
-        /// <param name="groupA"></param>
-        /// <param name="groupB"></param>
+        /// <param name="groupAId">Id of first group</param>
+        /// <param name="groupBId">Id of second group</param>
         /// <returns></returns>
-        static Edge FindEdge(Group groupA, Group groupB)
+        public static Edge GetEdge(int groupAId, int groupBId)
         {
-            SortedSet<int> groupIds = new SortedSet<int>() { groupA.Id, groupB.Id };
+            if (groupAId == groupBId) return null;
+            SortedSet<int> groupIds = new SortedSet<int>() { groupAId, groupBId };
             foreach (Edge e in EDGES)
             {
                 SortedSet<int> edgeGroupIds = new SortedSet<int>() { e.StartDoor.GroupId, e.EndDoor.GroupId };
-                if (groupIds.Equals(edgeGroupIds)) return e;
+                if (groupIds.SetEquals(edgeGroupIds))
+                {
+                    return e;
+                }
             }
             return null;
         }
 
-        static Edge FindEdge(Door doorA, Door doorB)
+        public static Edge GetEdge(Door doorA, Door doorB)
         {
-            return FindEdge(ListGroups.FindGroup(doorA.GroupId), ListGroups.FindGroup(doorB.GroupId));
+            return GetEdge(doorA.GroupId, doorB.GroupId);
         }
     }
 }
