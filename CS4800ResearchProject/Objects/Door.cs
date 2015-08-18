@@ -1,24 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CS4800ResearchProject
+﻿namespace CS4800ResearchProject.Objects
 {
     public class Door
     {
-        public Guid Id;
-        public LatLng LatLng;
-        public Guid Group_Id;
-        public Guid Building_Id;
+        public readonly LatLng Location;
+        public readonly int Id;
+        public readonly int GroupId;
 
-        public Door (Guid id, LatLng latlng, Guid group_id, Guid building_id)
+        public Door (LatLng location, int id, int groupId)
         {
-            Id = id;
-            LatLng = latlng;
-            Group_Id = group_id;
-            Building_Id = building_id;
+            this.Location = location;
+            this.Id = id;
+            this.GroupId = groupId;
         }
 
         public double Distance (Door d)
@@ -28,7 +20,7 @@ namespace CS4800ResearchProject
 
         public static double Distance (Door d1, Door d2)
         {
-            return LatLng.Distance(d1.LatLng, d2.LatLng);
+            return LatLng.Distance(d1.Location, d2.Location);
         }
     }
 }

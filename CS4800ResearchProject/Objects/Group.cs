@@ -1,50 +1,40 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-namespace CS4800ResearchProject
+namespace CS4800ResearchProject.Objects
 {
     public class Group
     {
-        public Guid Id;
+        public List<Door> Doors;
+        public int Id;
 
-        public List<Door> doors
+        public Group(int id)
         {
-            get
+            Doors = new List<Door>();
+            this.Id = id;
+            foreach (CsvRow row in ListGroups.CSV)
             {
-                List<Door> accdoors = new List<Door>();
-                foreach (Building b in this.buildings)
+                if (row.GroupId == id)
                 {
-                    accdoors.AddRange(b.Doors);
+                    Door d = new Door(new LatLng(row.Latitude, row.Longitude), row.DoorId, id);
+                    Doors.Add(d);
                 }
-                return accdoors;
             }
         }
 
-        public List<Building> buildings;
-
-        public Group (Guid Id, List<Building> buildings)
-        {
-            this.Id = Id;
-            this.buildings = buildings;
-        }
-
-        public Edge ShortestEdge (Group g)
+        public Edge ShortestEdge(Group g)
         {
             return ShortestEdge(this, g);
         }
 
-        public static Edge ShortestEdge(Group ga, Group gb)
+        public static Edge ShortestEdge(Group groupA, Group groupB)
         {
-            Edge e = new Edge();
-            foreach (Door d_a in ga.doors)
+            Edge e = null;
+            foreach (Door doorA in groupA.Doors)
             {
-                foreach (Door d_b in gb.doors)
+                foreach (Door doorB in groupB.Doors)
                 {
-                    Edge tempE = new Edge(d_a, d_b, ga.Id, gb.Id, d_a.Distance(d_b));
-                    if (e == new Edge())
+                    Edge tempE = new Edge(doorA, doorB, doorA.Distance(doorB));
+                    if (e == null)
                     {
                         e = tempE;
                         continue;
@@ -56,6 +46,23 @@ namespace CS4800ResearchProject
                 }
             }
             return e;
+        }
+
+        // override object.Equals
+        public override bool Equals(object obj)
+        {
+            if (obj == null || GetType() != obj.GetType())
+            {
+                return false;
+            }
+
+            return (obj as Group).Id == this.Id;
+        }
+
+        // override object.GetHashCode
+        public override int GetHashCode()
+        {
+            return new { Doors, Id }.GetHashCode();
         }
     }
 }

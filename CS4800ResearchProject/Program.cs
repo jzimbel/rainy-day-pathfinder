@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CS4800ResearchProject
 {
@@ -10,6 +6,9 @@ namespace CS4800ResearchProject
     {
         static void Main(string[] args)
         {
+            System.Diagnostics.Debug.WriteLine(ListGroups.GROUPS[0]);
+            System.Diagnostics.Debug.WriteLine(ListEdges.EDGES[0]);
+            System.Diagnostics.Debug.WriteLine("hi");
         }
     }
 }

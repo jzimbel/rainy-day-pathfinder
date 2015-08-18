@@ -43,9 +43,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ListEdges.cs" />
+    <Compile Include="ListEdges.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
     <Compile Include="ListGroups.cs" />
     <Compile Include="Objects\Building.cs" />
+    <Compile Include="Objects\CsvRow.cs" />
     <Compile Include="Objects\Door.cs" />
     <Compile Include="Objects\Edge.cs" />
     <Compile Include="Objects\Group.cs" />
@@ -55,7 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="DoorData - locations.csv" />
+    <None Include="doors.csv" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
