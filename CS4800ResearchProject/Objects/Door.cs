@@ -1,18 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CS4800ResearchProject
+﻿namespace CS4800ResearchProject.Objects
 {
     public class Door
     {
-        public LatLng Location;
+        public readonly LatLng Location;
+        public readonly int Id;
+        public readonly int GroupId;
 
-        public Door (LatLng location)
+        public Door (LatLng location, int id, int groupId)
         {
             this.Location = location;
+            this.Id = id;
+            this.GroupId = groupId;
         }
 
         public double Distance (Door d)

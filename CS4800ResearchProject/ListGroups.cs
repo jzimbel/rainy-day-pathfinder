@@ -1,41 +1,57 @@
-﻿using System;
+﻿using CS4800ResearchProject.Objects;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CS4800ResearchProject
 {
     public static class ListGroups
     {
-        private static string csvPath = "..\\..\\doors.csv";
-        public static List<Group> Groups;
+        private static readonly string CSVPATH = "..\\..\\doors.csv";
+
+        public static readonly List<CsvRow> CSV;
+        public static readonly List<Group> GROUPS;
 
         static ListGroups()
         {
-            var csv = from line in File.ReadAllLines(csvPath).Skip(1)
+            List<Group> groupsConstructor = new List<Group>();
+            CSV = (from line in File.ReadAllLines(CSVPATH).Skip(1)
                     let columns = line.Split(',')
-                    select new
+                    select new CsvRow
                     {
-                        DoorId = Guid.Parse(columns[0]),
+                        DoorId = int.Parse(columns[0]),
                         Building = columns[1],
-                        GroupId = Guid.Parse(columns[2]),
+                        GroupId = int.Parse(columns[2]),
                         Latitude = double.Parse(columns[3]),
                         Longitude = double.Parse(columns[4])
-                    };
-            foreach (var door in csv)
+                    })
+                    .ToList();
+            int i = 0;
+            foreach (CsvRow row in CSV)
             {
-                if (!Groups.Select(g => { return g.Id; }).ToList().Contains(door.GroupId))
+                if (i == row.GroupId)
                 {
-                    Door d = new Door()
-                    Group g = new Group(door.GroupId, new List<Building>());
-                    Building b = new Building(new Guid(), door.Building, new List<Door>());
-                    
-                    g.buildings.Add(door.Building);
+                    Group g = new Group(row.GroupId);
+                    groupsConstructor.Add(g);
+                    i++;
                 }
             }
-            Console.WriteLine(csv.ToString());
+            GROUPS = groupsConstructor;
+        }
+
+        /// <summary>
+        /// Returns Group with matching Id within ListGroups.GROUPS if one exists.
+        /// Otherwise returns null.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static Group FindGroup(int id)
+        {
+            foreach (Group g in GROUPS)
+            {
+                if (g.Id == id) return g;
+            }
+            return null;
         }
     }
 }
