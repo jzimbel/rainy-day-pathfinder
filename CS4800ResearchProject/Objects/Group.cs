@@ -8,26 +8,11 @@ namespace CS4800ResearchProject
 {
     public class Group
     {
-        public Guid Id;
-        public List<Building> buildings;
+        public List<Door> Doors;
 
-        public List<Door> doors
+        public Group (Guid Id)
         {
-            get
-            {
-                List<Door> accdoors = new List<Door>();
-                foreach (Building b in this.buildings)
-                {
-                    accdoors.AddRange(b.Doors);
-                }
-                return accdoors;
-            }
-        }
 
-        public Group (Guid Id, List<Building> buildings)
-        {
-            this.Id = Id;
-            this.buildings = buildings;
         }
 
         public Edge ShortestEdge (Group g)
