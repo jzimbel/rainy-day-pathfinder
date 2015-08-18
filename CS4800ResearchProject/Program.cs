@@ -10,6 +10,7 @@ namespace CS4800ResearchProject
     {
         static void Main(string[] args)
         {
+            List<Group> asdf = ListGroups.Groups;
         }
     }
 }

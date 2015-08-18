@@ -19,7 +19,7 @@ namespace CS4800ResearchProject
             get
             {
                 return String.Format("https://www.google.com/maps/dir/{0},{1}/{2},{3}/",
-                                StartDoor.LatLng.Latitude, StartDoor.LatLng.Longitude, EndDoor.LatLng.Latitude, EndDoor.LatLng.Longitude);
+                                StartDoor.Location.Latitude, StartDoor.Location.Longitude, EndDoor.Location.Latitude, EndDoor.Location.Longitude);
             }
         }
 

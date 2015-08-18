@@ -9,6 +9,7 @@ namespace CS4800ResearchProject
     public class Group
     {
         public Guid Id;
+        public List<Building> buildings;
 
         public List<Door> doors
         {
@@ -22,8 +23,6 @@ namespace CS4800ResearchProject
                 return accdoors;
             }
         }
-
-        public List<Building> buildings;
 
         public Group (Guid Id, List<Building> buildings)
         {
