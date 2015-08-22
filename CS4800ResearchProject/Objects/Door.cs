@@ -2,15 +2,21 @@
 {
     public class Door
     {
-        public readonly LatLng Location;
+        private readonly LatLng Location;
         public readonly int Id;
         public readonly int GroupId;
+        public double Latitude { get { return Location.Latitude; } }
+        public double Longitude { get { return Location.Latitude; } }
 
         public Door (LatLng location, int id, int groupId)
         {
             this.Location = location;
             this.Id = id;
             this.GroupId = groupId;
+        }
+
+        public Door(double latitude, double longitude, int id, int groupId)
+            : this(new LatLng(latitude, longitude), id, groupId) {
         }
 
         public double Distance (Door d)

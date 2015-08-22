@@ -41,7 +41,7 @@ namespace CS4800ResearchProject
             SortedSet<int> groupIds = new SortedSet<int>() { groupAId, groupBId };
             foreach (Edge e in EDGES)
             {
-                SortedSet<int> edgeGroupIds = new SortedSet<int>() { e.StartDoor.GroupId, e.EndDoor.GroupId };
+                SortedSet<int> edgeGroupIds = new SortedSet<int>() { e.DoorOne.GroupId, e.DoorTwo.GroupId };
                 if (groupIds.SetEquals(edgeGroupIds))
                 {
                     return e;

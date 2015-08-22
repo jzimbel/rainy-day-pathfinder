@@ -1,28 +1,27 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace CS4800ResearchProject.Objects
 {
     public class Edge
     {
-        public Door StartDoor;
-        public Door EndDoor;
-        public double Distance;
+        public readonly Door DoorOne;
+        public readonly Door DoorTwo;
+        public readonly double Distance;
 
-        public string MapsUrl
+        public Edge(Door doorOne, Door doorTwo)
         {
-            get
-            {
-                // e.g. https://www.google.com/maps/dir/42.338843,-71.092052/42.338628,-71.091487/
-                return String.Format("https://www.google.com/maps/dir/{0},{1}/{2},{3}/",
-                                StartDoor.Location.Latitude, StartDoor.Location.Longitude, EndDoor.Location.Latitude, EndDoor.Location.Longitude);
-            }
+            DoorOne = doorOne;
+            DoorTwo = doorTwo;
+            Distance = DoorOne.Distance(DoorTwo);
         }
 
-        public Edge(Door startDoor, Door endDoor, double distance)
+        public Uri MapsUrl(bool direction)
         {
-            StartDoor = startDoor;
-            EndDoor = endDoor;
-            Distance = distance;
+            if (direction)
+                return new Uri(String.Format("https://www.google.com/maps/dir/{0},{1}/{2},{3}/", DoorOne.Latitude, DoorOne.Longitude, DoorTwo.Latitude, DoorTwo.Longitude));
+            else
+                return new Uri(String.Format("https://www.google.com/maps/dir/{0},{1}/{2},{3}/", DoorTwo.Latitude, DoorTwo.Longitude, DoorOne.Latitude, DoorOne.Longitude));
         }
     }
 }

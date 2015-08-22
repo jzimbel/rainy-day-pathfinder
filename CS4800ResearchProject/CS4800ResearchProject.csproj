@@ -47,7 +47,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="ListGroups.cs" />
-    <Compile Include="Objects\Building.cs" />
     <Compile Include="Objects\CsvRow.cs" />
     <Compile Include="Objects\Door.cs" />
     <Compile Include="Objects\Edge.cs" />

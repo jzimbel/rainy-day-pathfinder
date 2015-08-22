@@ -5,6 +5,7 @@ namespace CS4800ResearchProject.Objects
     public class Group
     {
         public List<Door> Doors;
+        public readonly List<string> Buildings;
         public int Id;
 
         public Group(int id)
@@ -15,7 +16,7 @@ namespace CS4800ResearchProject.Objects
             {
                 if (row.GroupId == id)
                 {
-                    Door d = new Door(new LatLng(row.Latitude, row.Longitude), row.DoorId, id);
+                    Door d = new Door(row.Latitude, row.Longitude, row.DoorId, id);
                     Doors.Add(d);
                 }
             }
@@ -33,7 +34,7 @@ namespace CS4800ResearchProject.Objects
             {
                 foreach (Door doorB in groupB.Doors)
                 {
-                    Edge tempE = new Edge(doorA, doorB, doorA.Distance(doorB));
+                    Edge tempE = new Edge(doorA, doorB);
                     if (e == null)
                     {
                         e = tempE;
@@ -62,7 +63,7 @@ namespace CS4800ResearchProject.Objects
         // override object.GetHashCode
         public override int GetHashCode()
         {
-            return new { Doors, Id }.GetHashCode();
+            return Id.GetHashCode();
         }
     }
 }

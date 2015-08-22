@@ -37,7 +37,7 @@ namespace CS4800ResearchProject.Objects
             dist = dist * 1.609344;
             return dist / 1000;
         }
-            
+        
         private static double deg2rad(double deg)
         {
             return (deg * Math.PI / 180.0);
