@@ -16,13 +16,12 @@ namespace CS4800ResearchProject
         static ListEdges()
         {
             List<Edge> edgesConstructor = new List<Edge>();
-            for (int i = 0; i < ListGroups.GROUPS.Count; i++)
+            foreach (Group ga in ListGroups.GROUPS)
             {
-                Group groupA = ListGroups.GROUPS[i];
-                for (int j = i+1; j < ListGroups.GROUPS.Count; j++)
+                foreach (Group gb in ListGroups.GROUPS)
                 {
-                    Group groupB = ListGroups.GROUPS[j];
-                    edgesConstructor.Add(groupA.ShortestEdge(groupB));
+                    if (ga.Equals(gb)) continue;
+                    edgesConstructor.Add(ga.ShortestEdge(gb));
                 }
             }
             EDGES = edgesConstructor;
@@ -38,11 +37,9 @@ namespace CS4800ResearchProject
         public static Edge GetEdge(int groupAId, int groupBId)
         {
             if (groupAId == groupBId) return null;
-            SortedSet<int> groupIds = new SortedSet<int>() { groupAId, groupBId };
             foreach (Edge e in EDGES)
             {
-                SortedSet<int> edgeGroupIds = new SortedSet<int>() { e.DoorOne.GroupId, e.DoorTwo.GroupId };
-                if (groupIds.SetEquals(edgeGroupIds))
+                if (e.DoorOne.GroupId == groupAId && e.DoorTwo.GroupId == groupBId)
                 {
                     return e;
                 }

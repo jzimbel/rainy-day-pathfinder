@@ -16,12 +16,9 @@ namespace CS4800ResearchProject.Objects
             Distance = DoorOne.Distance(DoorTwo);
         }
 
-        public Uri MapsUrl(bool direction)
+        public Uri MapsUrl()
         {
-            if (direction)
-                return new Uri(String.Format("https://www.google.com/maps/dir/{0},{1}/{2},{3}/", DoorOne.Latitude, DoorOne.Longitude, DoorTwo.Latitude, DoorTwo.Longitude));
-            else
-                return new Uri(String.Format("https://www.google.com/maps/dir/{0},{1}/{2},{3}/", DoorTwo.Latitude, DoorTwo.Longitude, DoorOne.Latitude, DoorOne.Longitude));
+            return new Uri(String.Format("https://www.google.com/maps/dir/{0},{1}/{2},{3}/", DoorOne.Latitude, DoorOne.Longitude, DoorTwo.Latitude, DoorTwo.Longitude));
         }
     }
 }

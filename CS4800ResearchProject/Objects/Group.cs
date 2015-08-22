@@ -5,7 +5,7 @@ namespace CS4800ResearchProject.Objects
     public class Group
     {
         public List<Door> Doors;
-        public readonly List<string> Buildings;
+        public List<string> Buildings;
         public int Id;
 
         public Group(int id)
