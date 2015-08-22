@@ -51,5 +51,82 @@ namespace CS4800ResearchProject
         {
             return GetEdge(doorA.GroupId, doorB.GroupId);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="groupId"></param>
+        /// <returns></returns>
+        public static List<Edge> GetEdges(int groupId)
+        {
+            List<Edge> edges = new List<Edge>();
+            foreach (Edge e in ListEdges.EDGES)
+            {
+                if (e.DoorOne.GroupId.Equals(groupId)) edges.Add(e);
+            }
+            return edges;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="group"></param>
+        /// <returns></returns>
+        public static List<Edge> GetEdges(Group group)
+        {
+            return GetEdges(group.Id);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="groupsA"></param>
+        /// <returns></returns>
+        public static List<Edge> GetCut(List<Group> groupsA)
+        {
+            List<int> groupIds = new List<int>();
+            foreach (Group ga in groupsA)
+            {
+                groupIds.Add(ga.Id);
+            }
+            return GetCut(groupIds);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="groupsA"></param>
+        /// <returns></returns>
+        public static List<Edge> GetCut(List<int> groupsA)
+        {
+            List<Edge> cutset = new List<Edge>();
+            foreach (int ga in groupsA)
+            {
+                List<Edge> edgesA = GetEdges(ga);
+                foreach (Edge e in edgesA)
+                {
+                    if (!groupsA.Contains(e.DoorTwo.GroupId))
+                    {
+                        cutset.Add(e);
+                    }
+                }
+            }
+            return cutset;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="edges"></param>
+        /// <returns></returns>
+        public static double GetDistance(List<Edge> edges)
+        {
+            double totaldistance = 0;
+            foreach (Edge e in edges)
+            {
+                totaldistance += e.Distance;
+            }
+            return totaldistance;
+        }
     }
 }

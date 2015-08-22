@@ -54,6 +54,11 @@ namespace CS4800ResearchProject
             return null;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="building"></param>
+        /// <returns></returns>
         public static Group FindGroup(string building)
         {
             foreach (Group g in GROUPS)
