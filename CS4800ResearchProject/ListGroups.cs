@@ -67,5 +67,19 @@ namespace CS4800ResearchProject
             }
             return null;
         }
+
+        /// <summary>
+        /// Returns a list of all buildings in the data structure.
+        /// </summary>
+        /// <returns></returns>
+        public static List<string> GetBuildings()
+        {
+            List<string> buildings = new List<string>();
+            foreach (Group g in GROUPS)
+            {
+                buildings.AddRange(g.Buildings);
+            }
+            return buildings;
+        }
     }
 }

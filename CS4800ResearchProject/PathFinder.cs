@@ -31,7 +31,8 @@ namespace CS4800ResearchProject
                         continue;
                     foreach (Edge e in ListEdges.GetEdges(g))
                     {
-                        List<Edge> newPath = shortestPathToGroup[g.Id]; // get the new path from the groupA node, including the current edge
+                        List<Edge> newPath = new List<Edge>(); // get the new path from the groupA node, including the current edge
+                        newPath.Concat(shortestPathToGroup[g.Id]);
                         newPath.Add(e);
 
                         if (!shortestPathToGroup.ContainsKey(e.DoorTwo.GroupId)) // if the node at the end of the edge is inf

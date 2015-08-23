@@ -11,11 +11,16 @@ namespace CS4800ResearchProject.Objects
         public Group(int id)
         {
             Doors = new List<Door>();
+            Buildings = new List<string>();
             this.Id = id;
             foreach (CsvRow row in ListGroups.CSV)
             {
                 if (row.GroupId == id)
                 {
+                    if (!Buildings.Contains(row.Building))
+                    {
+                        Buildings.Add(row.Building);
+                    }
                     Door d = new Door(row.Latitude, row.Longitude, row.DoorId, id);
                     Doors.Add(d);
                 }
