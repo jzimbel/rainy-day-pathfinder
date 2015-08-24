@@ -6,7 +6,7 @@
         public readonly int Id;
         public readonly int GroupId;
         public double Latitude { get { return m_location.Latitude; } }
-        public double Longitude { get { return m_location.Latitude; } }
+        public double Longitude { get { return m_location.Longitude; } }
 
         public Door (LatLng location, int id, int groupId)
         {

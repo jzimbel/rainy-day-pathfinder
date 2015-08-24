@@ -10,7 +10,13 @@ namespace CS4800ResearchProject
         {
             List<string> endpoints = PromptUser();
             Console.WriteLine(endpoints.ToString());
-            PathFinder.FindPath(endpoints[0], endpoints[1]);
+            List<Edge> shortestPath = PathFinder.FindPath(endpoints[0], endpoints[1]);
+            foreach (Edge e in shortestPath)
+            {
+                Console.WriteLine(e.MapsUrl().ToString());
+            }
+            Console.WriteLine("Press any key to exit");
+            Console.ReadKey();
         }
 
         private static List<string> PromptUser()
