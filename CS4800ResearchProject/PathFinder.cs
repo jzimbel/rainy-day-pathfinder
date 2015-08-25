@@ -89,6 +89,7 @@ namespace CS4800ResearchProject
                 shortestPath.Add(ListEdges.GetEdge((int)prevGroupId[target], target));
                 target = (int)prevGroupId[target];
             }
+            shortestPath.Reverse();
             return shortestPath;
         }
     }
